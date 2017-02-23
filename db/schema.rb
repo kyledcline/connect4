@@ -13,13 +13,8 @@
 
 ActiveRecord::Schema.define(version: 20170223175437) do
 
-  create_table "grids", force: :cascade do |t|
-    t.integer  "match_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  add_index "grids", ["match_id"], name: "index_grids_on_match_id"
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "matches", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -33,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170223175437) do
     t.datetime "updated_at",              null: false
   end
 
-  add_index "players", ["match_id"], name: "index_players_on_match_id"
+  add_index "players", ["match_id"], name: "index_players_on_match_id", using: :btree
 
   create_table "turns", force: :cascade do |t|
     t.integer  "match_id"
@@ -43,7 +38,8 @@ ActiveRecord::Schema.define(version: 20170223175437) do
     t.integer  "column"
   end
 
-  add_index "turns", ["match_id"], name: "index_turns_on_match_id"
-  add_index "turns", ["player_id"], name: "index_turns_on_player_id"
+  add_index "turns", ["match_id"], name: "index_turns_on_match_id", using: :btree
+  add_index "turns", ["player_id"], name: "index_turns_on_player_id", using: :btree
 
+  add_foreign_key "players", "matches"
 end
