@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170223170042) do
+ActiveRecord::Schema.define(version: 20170223175437) do
 
   create_table "grids", force: :cascade do |t|
     t.integer  "match_id"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20170223170042) do
     t.integer  "player_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "column"
   end
 
   add_index "turns", ["match_id"], name: "index_turns_on_match_id"
